@@ -1,0 +1,21 @@
+TARGET=program
+CSRC=main.c
+CSRC+=
+
+CC=gcc
+OPT=0
+CFLAGS=-ggdb3 -Wall -Werror -O$(OPT)
+LDFLAGS=-lm
+COBJ=$(CSRC:.c=.o)
+
+all: $(TARGET).out
+
+$(TARGET).out:$(COBJ)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
+$(COBJ):%.o:%.c
+$(CC) $(CFLAGS) -c $<
+
+clean:
+	rm -f $(TARGET) .out $(COBJ)
+
+.PHONY: clean all start build end	
